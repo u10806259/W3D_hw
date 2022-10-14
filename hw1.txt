@@ -5,7 +5,7 @@
 <head>
 <style>
 
-
+https://github.com/u10806259/W3D_hw/blob/master/hw1.txt
 </style>
 </head>
 
@@ -13,7 +13,7 @@
 <button id='power'>Power</button>
 <div id='bkgd' style="position:absolute; top: 10vh; left: 10vw; width:60vw; height: 60vh; ">
   
-  <img src="https://en.pimg.jp/000/975/445/1/975445.jpg" alt="ци? width="400px" height="400px">
+  <img src="https://en.pimg.jp/000/975/445/1/975445.jpg" alt="tree" width="400px" height="400px">
 </div>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 

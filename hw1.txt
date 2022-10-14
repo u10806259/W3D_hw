@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<style>
+
+
+</style>
+</head>
+
+<body> 
+<button id='power'>Power</button>
+<div id='bkgd' style="position:absolute; top: 10vh; left: 10vw; width:60vw; height: 60vh; ">
+  
+  <img src="https://en.pimg.jp/000/975/445/1/975445.jpg" alt="ци? width="400px" height="400px">
+</div>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<script>
+var powerOn = true;
+
+$('#power').click (function() {
+  powerOn = !powerOn;
+  
+  if (powerOn === true) {  // false--> true
+     lamps.forEach (function(item) {item.startBlink();});
+  }
+});
+
+class Lamp {
+
+  constructor(name) {
+    this.name = name + Lamp.id++;
+    this.myStatus = false;
+    
+    let el = document.createElement ('div');
+    el.id = this.name;
+    let text = document.createTextNode ('.');//name + 
+    el.appendChild(text);
+    let bkgd = document.getElementById('bkgd');
+    bkgd.appendChild(el);
+    this.hue = Math.random()*360;
+
+    // styles
+    el.setAttribute ("style", `background-color: hsl(${this.hue}, 90%, 50%); width:10%,height:10%`);
+    this.left = Math.random()*0.8;
+    this.top = Math.random()*0.8;
+    el.style.position = "absolute";
+    el.style.left = this.left*100 + '%'; 
+    el.style.top = this.top*100 + '%';
+  }
+
+  toggle() {
+    this.myStatus = ! this.myStatus;
+    
+    if (powerOn) {
+       setTimeout (()=>{this.toggle();}, Math.random()*1000);
+    }
+    
+    if (this.myStatus === true) {
+      $('#'+this.name).css('backgroundColor', `hsl(${this.hue},90%,80%)`);
+      //$('#'+this.name).text(this.name + ' is on');
+    } else {
+      $('#'+this.name).css('backgroundColor', `hsl(${this.hue},90%,24%)`);
+      //$('#'+this.name).text(this.name + ' is off');
+    }
+  }
+
+  startBlink() {
+    var that = this;
+/*   
+    setInterval(function() {
+      that.toggle();
+    }, 500);
+*/
+   setTimeout (()=>{ this.toggle(); }, 0);
+     
+    //setInterval (that.toggle, 500);   // somehow, it does not work
+  }
+}
+
+
+Lamp.id = 0; // class variable
+lamps = [];
+
+for (let i = 0; i < 10; i++) {
+   let ll = new Lamp ('light');
+   lamps.push (ll);
+}
+
+lamps.forEach ( function(ll) {ll.startBlink();} );
+
+</script>
+</body>
+
+</html>
